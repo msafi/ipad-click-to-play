@@ -61,11 +61,13 @@
         $('.micro-play')
           .each(function() {
             if (self !== this) {
+              this.pause()
+
               $(this)
                 .data('firstClick', true)
                 .data('needsBuffer', true)
 
-              $(this).addClass('not-playing')
+              $(this).removeClass('loading playing').addClass('not-playing')
             }
           })
       })
