@@ -6,27 +6,35 @@
     }
   </style>
 </head>
-<body id="body">
-<video class="micro-play" controls src="video.mp4"></video>
-<video class="micro-play" controls src="2.mp4"></video>
-<video class="micro-play" controls src="3.mp4"></video>
-<video class="micro-play" controls src="4.mp4"></video>
-<video class="micro-play" controls src="5.mp4"></video>
-<!--<video src="5.mp4"></video>-->
+<body>
+<video class="micro-play" src="2.mp4"></video>
+<video class="micro-play" src="3.mp4"></video>
+<video class="micro-play" src="4.mp4"></video>
+<video class="micro-play" src="5.mp4"></video>
+
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
-//  var video = document.createElement('video')
-//  video.src = '1.mp4'
-//  video.setAttribute('controls')
-//
-//  var button = document.createElement('button')
-//  button.innerHTML = 'Play'
-//  button.addEventListener('click', function() {
-//    video.play()
-//  })
-//
-//  document.getElementById('body').appendChild(video)
-//  document.getElementById('body').appendChild(button)
+  jQuery(document).ready(function($) {
+    $('.micro-play').on('click', function() {
+      if (this.paused) {
+        this.play()
+      } else {
+        this.pause()
+      }
+    })
+  })
+  //  var video = document.createElement('video')
+  //  video.src = '1.mp4'
+  //  video.setAttribute('controls')
+  //
+  //  var button = document.createElement('button')
+  //  button.innerHTML = 'Play'
+  //  button.addEventListener('click', function() {
+  //    video.play()
+  //  })
+  //
+  //  document.getElementById('body').appendChild(video)
+  //  document.getElementById('body').appendChild(button)
 </script>
 </body>
 </html>
