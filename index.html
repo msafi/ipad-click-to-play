@@ -4,6 +4,15 @@
     video {
       width: 200px;
     }
+
+    video.not-playing {
+      border-bottom: 5px red solid;
+    }
+
+    video.playing {
+      border-bottom: 5px green solid;
+    }
+
   </style>
 </head>
 <body>
@@ -15,13 +24,30 @@
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
   jQuery(document).ready(function($) {
-    $('.micro-play').on('click', function() {
-      if (this.paused) {
-        this.play()
-      } else {
-        this.pause()
-      }
-    })
+    $('.micro-play')
+      .addClass('not-playing')
+      .on('click', function() {
+        if (this.paused) {
+          if (this.currentTime === 0) {
+            this.load()
+          } else {
+            this.play()
+          }
+
+          $(this).on('canplaythrough', function() {
+            this.play()
+          })
+        } else {
+          this.pause()
+        }
+      })
+      .on('ended pause', function() {
+        $(this).removeClass('playing').addClass('not-playing')
+      })
+      .on('playing', function() {
+        console.log(this)
+        $(this).removeClass('not-playing').addClass('playing')
+      })
   })
   //  var video = document.createElement('video')
   //  video.src = '1.mp4'
