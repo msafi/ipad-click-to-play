@@ -28,50 +28,41 @@
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
   jQuery(document).ready(function($) {
-    var userWants = false
+    var firstClick = true
+    var needsBuffer = true
 
     $('.micro-play')
       .addClass('not-playing')
       .on('click', function() {
-        userWants = !userWants
-
-        if (this.paused) {
-          if (this.currentTime === 0) {
-            this.load()
-            $(this).addClass('loading')
-          } else {
+        if (firstClick === false && needsBuffer === true) { // Still loading, give it sometime.
+          return
+        }
+        
+        if (firstClick === true) { // First click, buffer the video first.
+          this.load()
+          $(this).addClass('loading')
+          firstClick = false
+        } else { // Now you can play and stop as you wish.
+          if (this.paused) {
             this.play()
+          } else {
+            this.pause()
           }
-
-          $(this).on('canplaythrough', function() {
-            if (userWants === true) {
-              this.play()
-            }
-          })
-        } else {
-          this.pause()
+        }
+      })
+      .on('canplaythrough', function() {
+        if (needsBuffer === true) {
+          this.play()
+          needsBuffer = false
         }
       })
       .on('ended pause', function() {
         $(this).removeClass('playing').addClass('not-playing')
       })
       .on('playing', function() {
-        console.log(this)
         $(this).removeClass('not-playing loading').addClass('playing')
       })
   })
-  //  var video = document.createElement('video')
-  //  video.src = '1.mp4'
-  //  video.setAttribute('controls')
-  //
-  //  var button = document.createElement('button')
-  //  button.innerHTML = 'Play'
-  //  button.addEventListener('click', function() {
-  //    video.play()
-  //  })
-  //
-  //  document.getElementById('body').appendChild(video)
-  //  document.getElementById('body').appendChild(button)
 </script>
 </body>
 </html>
