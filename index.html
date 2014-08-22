@@ -28,21 +28,22 @@
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
   jQuery(document).ready(function($) {
-    var firstClick = true
-    var needsBuffer = true
-
     $('.micro-play')
+      .data('status', { firstClick: true, needsBuffer: true })
       .addClass('not-playing')
       .on('click', function() {
-        if (firstClick === false && needsBuffer === true) { // Still loading, give it sometime.
+        // Still loading, give it sometime.
+        if ($(this).data('status').firstClick === false && $(this).data('status').needsBuffer) {
           return
         }
-        
-        if (firstClick === true) { // First click, buffer the video first.
+
+        if ($(this).data('status').firstClick === true) { // First click, buffer the video first.
           this.load()
           $(this).addClass('loading')
-          firstClick = false
-        } else { // Now you can play and stop as you wish.
+          $(this).data('status').firstClick = false
+
+        // Now you can play and stop as you wish.
+        } else {
           if (this.paused) {
             this.play()
           } else {
@@ -51,9 +52,9 @@
         }
       })
       .on('canplaythrough', function() {
-        if (needsBuffer === true) {
+        if ($(this).data('status').needsBuffer === true) {
           this.play()
-          needsBuffer = false
+          $(this).data('status').needsBuffer = false
         }
       })
       .on('ended pause', function() {
