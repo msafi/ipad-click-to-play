@@ -32,14 +32,14 @@
       .addClass('not-playing')
       .on('click', function() {
         // Still loading, give it sometime.
-        if ($(this).data('status').firstClick === false && $(this).data('status').needsBuffer === true) {
+        if ($(this).data('firstClick')=== false && $(this).data('needsBuffer') === true) {
           return
         }
 
-        if ($(this).data('status').firstClick === true) { // First click, buffer the video first.
+        if ($(this).data('firstClick') === true) { // First click, buffer the video first.
           this.load()
           $(this).addClass('loading')
-          $(this).data('status').firstClick = false
+          $(this).data('firstClick', false)
 
         // Now you can play and stop as you wish.
         } else {
@@ -51,9 +51,9 @@
         }
       })
       .on('canplaythrough', function() {
-        if ($(this).data('status').needsBuffer === true) {
+        if ($(this).data('needsBuffer') === true) {
           this.play()
-          $(this).data('status').needsBuffer = false
+          $(this).data('needsBuffer', false)
         }
       })
       .on('ended pause', function() {
@@ -63,7 +63,8 @@
         $(this).removeClass('not-playing loading').addClass('playing')
       })
       .each(function() {
-        $(this).data('status', { firstClick: true, needsBuffer: true })
+        $(this).data('firstClick', true)
+        $(this).data('needsBuffer', true)
       })
   })
 </script>
