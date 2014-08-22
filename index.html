@@ -28,11 +28,19 @@
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
   jQuery(document).ready(function($) {
+    if (navigator.userAgent.match(/iPad/i) === null) { // if is not iPad
+      return
+    }
+
     $('.micro-play')
+      .each(function() {
+        $(this)
+          .data('firstClick', true)
+          .data('needsBuffer', true)
+      })
       .addClass('not-playing')
       .on('click', function() {
-        // Still loading, give it sometime.
-        if ($(this).data('firstClick')=== false && $(this).data('needsBuffer') === true) {
+        if ($(this).data('firstClick') === false && $(this).data('needsBuffer') === true) { // Still loading, give it sometime.
           return
         }
 
@@ -40,9 +48,7 @@
           this.load()
           $(this).addClass('loading')
           $(this).data('firstClick', false)
-
-        // Now you can play and stop as you wish.
-        } else {
+        } else { // Now you can play and stop as you wish.
           if (this.paused) {
             this.play()
           } else {
@@ -61,10 +67,6 @@
       })
       .on('playing', function() {
         $(this).removeClass('not-playing loading').addClass('playing')
-      })
-      .each(function() {
-        $(this).data('firstClick', true)
-        $(this).data('needsBuffer', true)
       })
   })
 </script>
