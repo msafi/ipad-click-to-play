@@ -29,11 +29,13 @@
 <script>
   jQuery(document).ready(function($) {
     $('.micro-play')
-      .data('status', { firstClick: true, needsBuffer: true })
       .addClass('not-playing')
+      .each(function() {
+        $(this).data('status', { firstClick: true, needsBuffer: true })
+      })
       .on('click', function() {
         // Still loading, give it sometime.
-        if ($(this).data('status').firstClick === false && $(this).data('status').needsBuffer) {
+        if ($(this).data('status').firstClick === false && $(this).data('status').needsBuffer === true) {
           return
         }
 
