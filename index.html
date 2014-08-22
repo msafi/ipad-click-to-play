@@ -13,6 +13,10 @@
       border-bottom: 5px green solid;
     }
 
+    video.loading {
+      border-bottom: 5px orange solid;
+    }
+
   </style>
 </head>
 <body>
@@ -24,18 +28,25 @@
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
   jQuery(document).ready(function($) {
+    var userWants = false
+
     $('.micro-play')
       .addClass('not-playing')
       .on('click', function() {
+        userWants = !userWants
+
         if (this.paused) {
           if (this.currentTime === 0) {
             this.load()
+            $(this).addClass('loading')
           } else {
             this.play()
           }
 
           $(this).on('canplaythrough', function() {
-            this.play()
+            if (userWants === true) {
+              this.play()
+            }
           })
         } else {
           this.pause()
@@ -46,7 +57,7 @@
       })
       .on('playing', function() {
         console.log(this)
-        $(this).removeClass('not-playing').addClass('playing')
+        $(this).removeClass('not-playing loading').addClass('playing')
       })
   })
   //  var video = document.createElement('video')
