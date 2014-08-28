@@ -38,6 +38,10 @@
       })
       .addClass('not-playing')
       .on('click', function() {
+        $('.micro-play').each(function() {
+          $(this).pause()
+        })
+
         if ($(this).data('needsBuffer') === true) {
           this.load()
         } else {
