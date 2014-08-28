@@ -55,7 +55,7 @@
       .on('ended pause', function(event) {
         $(this).removeClass('playing loading').addClass('not-playing')
       })
-      .on('playing play', function() {
+      .on('playing', function() {
         $(this).removeClass('not-playing loading').addClass('playing')
       })
   })
