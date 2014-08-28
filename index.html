@@ -55,7 +55,7 @@
         $(this).data('needsBuffer', false)
         this.play()
       })
-      .on('ended pause', function() {
+      .on('ended pause error abort stalled waiting', function() {
         $(this).removeClass('playing loading').addClass('not-playing')
       })
       .on('playing', function() {
