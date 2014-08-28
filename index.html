@@ -20,10 +20,10 @@
   </style>
 </head>
 <body>
-<video class="micro-play" src="2.mp4"></video>
-<video class="micro-play" src="3.mp4"></video>
-<video class="micro-play" src="4.mp4"></video>
-<video class="micro-play" src="5.mp4"></video>
+<video class="micro-play" src="videos/2.mp4"></video>
+<video class="micro-play" src="videos/3.mp4"></video>
+<video class="micro-play" src="videos/4.mp4"></video>
+<video class="micro-play" src="videos/5.mp4"></video>
 
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
@@ -55,21 +55,6 @@
             this.pause()
           }
         }
-
-        // Reset all other videos
-        var self = this
-        $('.micro-play')
-          .each(function() {
-            if (self !== this) {
-              this.pause()
-
-              $(this)
-                .data('firstClick', true)
-                .data('needsBuffer', true)
-
-              $(this).removeClass('loading playing').addClass('not-playing')
-            }
-          })
       })
       .on('canplaythrough', function() {
         if ($(this).data('needsBuffer') === true) {
