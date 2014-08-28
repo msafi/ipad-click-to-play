@@ -63,7 +63,7 @@
       .on('ended pause error abort stalled waiting', function() {
         $(this).removeClass('playing loading').addClass('not-playing')
       })
-      .on('playing', function() {
+      .on('playing play', function() {
         $(this).removeClass('not-playing loading').addClass('playing')
       })
   })
