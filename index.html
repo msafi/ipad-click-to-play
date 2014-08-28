@@ -39,7 +39,8 @@
       .addClass('not-playing')
       .on('click', function() {
         $('.micro-play').each(function() {
-          $(this).pause()
+          var self = this
+          self.pause()
         })
 
         if ($(this).data('needsBuffer') === true) {
