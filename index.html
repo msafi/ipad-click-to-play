@@ -38,7 +38,7 @@
         var self = this
 
         $('.micro-play').each(function() {
-          if (!self.is(this)) {
+          if (!$(self).is(this)) {
             this.pause()
           }
         })
