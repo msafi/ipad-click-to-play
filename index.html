@@ -32,34 +32,36 @@
 //      return
 //    }
 
-    $('.micro-play')
-      .addClass('not-playing')
-      .on('click', function() {
-        $(this).removeClass('playing not-playing').addClass('loading')
-        
-        var self = this
+    $('.micro-play').attr('controls', 'controls')
 
-        $('.micro-play').each(function() {
-          if (!$(self).is(this)) {
-            this.pause()
-          }
-        })
-
-        if (this.paused) {
-          this.play()
-        } else {
-          this.pause()
-        }
-      })
-      .on('loadstart', function() {
-        $(this).removeClass('playing not-playing').addClass('loading')
-      })
-      .on('ended pause', function(event) {
-        $(this).removeClass('playing loading').addClass('not-playing')
-      })
-      .on('playing', function() {
-        $(this).removeClass('not-playing loading').addClass('playing')
-      })
+//    $('.micro-play')
+//      .addClass('not-playing')
+//      .on('click', function() {
+//        $(this).removeClass('playing not-playing').addClass('loading')
+//
+//        var self = this
+//
+//        $('.micro-play').each(function() {
+//          if (!$(self).is(this)) {
+//            this.pause()
+//          }
+//        })
+//
+//        if (this.paused) {
+//          this.play()
+//        } else {
+//          this.pause()
+//        }
+//      })
+//      .on('loadstart', function() {
+//        $(this).removeClass('playing not-playing').addClass('loading')
+//      })
+//      .on('ended pause', function(event) {
+//        $(this).removeClass('playing loading').addClass('not-playing')
+//      })
+//      .on('playing', function() {
+//        $(this).removeClass('not-playing loading').addClass('playing')
+//      })
   })
 </script>
 </body>
