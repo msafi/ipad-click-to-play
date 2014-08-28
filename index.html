@@ -55,7 +55,7 @@
       .on('canplaythrough', function() {
         this.play()
       })
-      .on('ended pause error abort stalled waiting', function() {
+      .on('ended pause', function(event) {
         $(this).removeClass('playing loading').addClass('not-playing')
       })
       .on('playing play', function() {
