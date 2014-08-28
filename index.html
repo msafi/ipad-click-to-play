@@ -28,27 +28,19 @@
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
   jQuery(document).ready(function($) {
-    if (navigator.userAgent.match(/iPad/i) === null) { // if is not iPad
-      return
-    }
+//    if (navigator.userAgent.match(/iPad/i) === null) { // if is not iPad
+//      return
+//    }
 
     $('.micro-play')
       .each(function() {
-        $(this)
-          .data('firstClick', true)
-          .data('needsBuffer', true)
+        $(this).data('needsBuffer', true)
       })
       .addClass('not-playing')
       .on('click', function() {
-        if ($(this).data('firstClick') === false && $(this).data('needsBuffer') === true) { // Still loading, give it sometime.
-          return
-        }
-
-        if ($(this).data('firstClick') === true) { // First click, buffer the video first.
+        if ($(this).data('needsBuffer') === true) {
           this.load()
-          $(this).addClass('loading')
-          $(this).data('firstClick', false)
-        } else { // Now you can play and stop as you wish.
+        } else {
           if (this.paused) {
             this.play()
           } else {
@@ -56,22 +48,15 @@
           }
         }
       })
+      .on('loadstart', function() {
+        $(this).addClass('loading').removeClass('playing not-playing')
+      })
       .on('canplaythrough', function() {
-        if ($(this).data('needsBuffer') === true) {
-          this.play()
-          $(this).data('needsBuffer', false)
-        }
+        $(this).data('needsBuffer', false)
+        this.play()
       })
       .on('ended pause', function() {
         $(this).removeClass('playing').addClass('not-playing')
-      })
-      .on('playing', function() {
-        $('.micro-play')
-          each(function() {
-            $(this)
-              .data('firstClick', true)
-              .data('needsBuffer', true)
-          })
       })
       .on('playing', function() {
         $(this).removeClass('not-playing loading').addClass('playing')
