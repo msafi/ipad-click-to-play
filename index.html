@@ -28,9 +28,9 @@
 <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 <script>
   jQuery(document).ready(function($) {
-//    if (navigator.userAgent.match(/iPad/i) === null) { // if is not iPad
-//      return
-//    }
+    if (navigator.userAgent.match(/iPad/i) === null) { // if is not iPad
+      return
+    }
 
     $('.micro-play')
       .addClass('not-playing')
@@ -57,7 +57,7 @@
       .on('canplay canplaythrough', function() {
         this.play()
       })
-      .on('ended pause', function() {
+      .on('ended pause', function(h) {
         $(this).removeClass('playing loading').addClass('not-playing')
       })
       .on('playing', function() {
