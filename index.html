@@ -35,9 +35,12 @@
     $('.micro-play')
       .addClass('not-playing')
       .on('click', function() {
+        var self = this
+
         $('.micro-play').each(function() {
-          var self = this
-          self.pause()
+          if (!self.is(this)) {
+            this.pause()
+          }
         })
 
         if (this.paused) {
