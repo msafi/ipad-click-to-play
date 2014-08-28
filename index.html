@@ -49,14 +49,14 @@
         }
       })
       .on('loadstart', function() {
-        $(this).addClass('loading').removeClass('playing not-playing')
+        $(this).removeClass('playing not-playing').addClass('loading')
       })
       .on('canplaythrough', function() {
         $(this).data('needsBuffer', false)
         this.play()
       })
       .on('ended pause', function() {
-        $(this).removeClass('playing').addClass('not-playing')
+        $(this).removeClass('playing loading').addClass('not-playing')
       })
       .on('playing', function() {
         $(this).removeClass('not-playing loading').addClass('playing')
