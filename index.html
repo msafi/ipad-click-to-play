@@ -66,6 +66,14 @@
         $(this).removeClass('playing').addClass('not-playing')
       })
       .on('playing', function() {
+        $('.micro-play')
+          each(function() {
+            $(this)
+              .data('firstClick', true)
+              .data('needsBuffer', true)
+          })
+      })
+      .on('playing', function() {
         $(this).removeClass('not-playing loading').addClass('playing')
       })
   })
