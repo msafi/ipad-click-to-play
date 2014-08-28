@@ -35,6 +35,8 @@
     $('.micro-play')
       .addClass('not-playing')
       .on('click', function() {
+        $(this).removeClass('playing not-playing').addClass('loading')
+        
         var self = this
 
         $('.micro-play').each(function() {
