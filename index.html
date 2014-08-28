@@ -33,9 +33,6 @@
 //    }
 
     $('.micro-play')
-      .each(function() {
-        $(this).data('needsBuffer', true)
-      })
       .addClass('not-playing')
       .on('click', function() {
         $('.micro-play').each(function() {
@@ -43,21 +40,16 @@
           self.pause()
         })
 
-        if ($(this).data('needsBuffer') === true) {
+        if (this.paused) {
           this.load()
         } else {
-          if (this.paused) {
-            this.play()
-          } else {
-            this.pause()
-          }
+          this.pause()
         }
       })
       .on('loadstart', function() {
         $(this).removeClass('playing not-playing').addClass('loading')
       })
       .on('canplaythrough', function() {
-        $(this).data('needsBuffer', false)
         this.play()
       })
       .on('ended pause error abort stalled waiting', function() {
